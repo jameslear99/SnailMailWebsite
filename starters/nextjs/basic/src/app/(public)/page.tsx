@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/Button";
 import {
   Section,
   SectionHeading,
-  Eyebrow,
   AssetPlaceholder,
   FeatureCard,
 } from "@/components/public/marketing";
@@ -16,8 +15,7 @@ export default function HomePage() {
       <section className="bg-hero-glow relative overflow-hidden border-b border-border">
         <Container className="grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-2">
           <div>
-            <Eyebrow>Physical social media</Eyebrow>
-            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Social posts you can hold in your hands.
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted">

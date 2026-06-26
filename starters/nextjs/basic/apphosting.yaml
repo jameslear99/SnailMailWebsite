@@ -1,7 +1,14 @@
-# Snail Mail Social — public site + advertiser portal
-# Firebase App Hosting backend (Cloud Run). Configure secrets in Firebase Console:
-# App Hosting → Backend → Environment / Secrets
+# Snail Mail Social — Firebase App Hosting
 # See https://firebase.google.com/docs/app-hosting/configure
+#
+# App Hosting auto-injects FIREBASE_WEBAPP_CONFIG (build) and FIREBASE_CONFIG
+# (build + runtime) when the backend is linked to a Firebase web app — no
+# NEXT_PUBLIC_* secrets required.
+#
+# Optional server secrets (Stripe, custom service account): create with
+#   firebase apphosting:secrets:set SECRET_NAME --project YOUR_PROJECT
+# then add env entries here and grant access:
+#   firebase apphosting:secrets:grantaccess SECRET_NAME --backend BACKEND_ID
 
 runConfig:
   minInstances: 0
@@ -9,57 +16,3 @@ runConfig:
   # concurrency: 80
   # cpu: 1
   # memoryMiB: 512
-
-env:
-  # Firebase client (browser) — required at BUILD and RUNTIME for Next.js
-  - variable: NEXT_PUBLIC_FIREBASE_API_KEY
-    secret: NEXT_PUBLIC_FIREBASE_API_KEY
-    availability:
-      - BUILD
-      - RUNTIME
-  - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-    secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-    availability:
-      - BUILD
-      - RUNTIME
-  - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-    secret: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-    availability:
-      - BUILD
-      - RUNTIME
-  - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-    secret: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-    availability:
-      - BUILD
-      - RUNTIME
-  - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-    secret: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-    availability:
-      - BUILD
-      - RUNTIME
-  - variable: NEXT_PUBLIC_FIREBASE_APP_ID
-    secret: NEXT_PUBLIC_FIREBASE_APP_ID
-    availability:
-      - BUILD
-      - RUNTIME
-
-  # Firebase Admin (server API routes)
-  - variable: FIREBASE_SERVICE_ACCOUNT_JSON
-    secret: FIREBASE_SERVICE_ACCOUNT_JSON
-    availability:
-      - RUNTIME
-
-  # Stripe (optional — billing degrades gracefully when unset)
-  - variable: STRIPE_SECRET_KEY
-    secret: STRIPE_SECRET_KEY
-    availability:
-      - RUNTIME
-  - variable: NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-    secret: NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-    availability:
-      - BUILD
-      - RUNTIME
-  - variable: STRIPE_WEBHOOK_SECRET
-    secret: STRIPE_WEBHOOK_SECRET
-    availability:
-      - RUNTIME
