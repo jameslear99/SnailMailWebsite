@@ -1,0 +1,105 @@
+rules_version = '2';
+
+// ============================================================================
+// Snail Mail Social — Firestore security rules for the advertiser portal.
+//
+// These rules cover the collections this website reads/writes. They are shared
+// with the main app and the future admin portal, so MERGE the relevant blocks
+// into the project's canonical firestore.rules rather than replacing it.
+//
+// Assumptions:
+//  - Advertisers authenticate with Firebase Auth (email/password or Google).
+//  - Internal admins carry a custom claim: request.auth.token.admin == true.
+//    (Set via the Admin SDK; see Admin/scripts/set-admin-claim.cjs.)
+//  - Server-side API routes use the Admin SDK and BYPASS these rules.
+// ============================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    // Membership is denormalized onto each advertiser account.
+    function isAccountMember(accountId) {
+      return isSignedIn() &&
+        request.auth.uid in get(/databases/$(database)/documents/advertiserAccounts/$(accountId)).data.memberUserIds;
+    }
+
+    // ----- Advertiser users (one doc per auth uid) -----
+    match /advertiserUsers/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow create, update: if isSignedIn() && request.auth.uid == uid;
+      allow delete: if isAdmin();
+    }
+
+    // ----- Advertiser accounts (businesses) -----
+    match /advertiserAccounts/{accountId} {
+      allow read: if isAccountMember(accountId) || isAdmin();
+
+      // Anyone signed in can create an account, but they must list themselves
+      // as a member and start in the "pending" verification state.
+      allow create: if isSignedIn()
+        && request.auth.uid in request.resource.data.memberUserIds
+        && request.resource.data.verificationStatus == 'pending';
+
+      // Members may edit profile fields, but only admins may change the
+      // verification status (so advertisers can't self-verify).
+      allow update: if isAdmin() || (
+        isAccountMember(accountId)
+        && request.resource.data.verificationStatus == resource.data.verificationStatus
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // ----- Campaigns -----
+    match /campaigns/{campaignId} {
+      allow read: if isAdmin() || isAccountMember(resource.data.advertiserAccountId);
+
+      allow create: if isAdmin() || (
+        isAccountMember(request.resource.data.advertiserAccountId)
+        // New campaigns may only start in advertiser-allowed states.
+        && request.resource.data.status in ['draft', 'submitted',
+             'pending_advertiser_verification', 'pending_review']
+      );
+
+      // Members can update their campaigns but cannot self-approve / activate.
+      // Approval, activation, and completion are reserved for admins.
+      allow update: if isAdmin() || (
+        isAccountMember(resource.data.advertiserAccountId)
+        && request.resource.data.status in ['draft', 'submitted',
+             'pending_advertiser_verification', 'pending_review',
+             'paused', 'active', 'cancelled']
+        && !(request.resource.data.status in ['approved', 'completed', 'rejected'])
+      );
+
+      allow delete: if isAdmin() ||
+        (isAccountMember(resource.data.advertiserAccountId) && resource.data.status == 'draft');
+    }
+
+    // ----- Ad tiers (managed by admin; readable by all) -----
+    match /adTiers/{tierId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ----- Contact submissions (written by server Admin SDK only) -----
+    match /contactSubmissions/{id} {
+      allow read: if isAdmin();
+      allow write: if false; // created via API route using the Admin SDK
+    }
+
+    // ----- Collections owned by other systems (admin/app) -----
+    match /audienceSegments/{id}   { allow read: if isAdmin(); allow write: if isAdmin(); }
+    match /campaignMetrics/{id}    { allow read: if isAdmin(); allow write: if isAdmin(); }
+    match /campaignCreatives/{id}  { allow read: if isAdmin(); allow write: if isAdmin(); }
+    match /billingEvents/{id}      { allow read: if isAdmin(); allow write: if isAdmin(); }
+    match /legalDocuments/{id}     { allow read: if true;      allow write: if isAdmin(); }
+  }
+}

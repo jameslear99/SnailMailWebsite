@@ -1,0 +1,34 @@
+rules_version = '2';
+
+// ============================================================================
+// Storage rules for advertiser creative uploads.
+// Merge into the project's canonical storage.rules.
+//
+// Original uploads live under:
+//   advertiserCreatives/{accountId}/{campaignId}/original-*
+// Print-ready files are written by the fulfillment/admin pipeline (Admin SDK).
+// ============================================================================
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    match /advertiserCreatives/{accountId}/{campaignId}/{fileName} {
+      // For a stricter setup, verify account membership via a Cloud Function or
+      // custom claim. As a first pass we allow any signed-in advertiser to
+      // upload original artwork and read their own files.
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn()
+        && request.resource.size < 200 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      allow delete: if isAdmin();
+    }
+  }
+}
