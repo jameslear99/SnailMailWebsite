@@ -14,9 +14,9 @@ const DEFAULT_STORAGE_BUCKET =
   "snailmail-app.firebasestorage.app";
 
 export function hasAdminCredentials(): boolean {
-  if (process.env.FIREBASE_CONFIG?.trim()) return true;
   return Boolean(
-    process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim() ||
+    process.env.FIREBASE_CONFIG?.trim() ||
+      process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim() ||
       process.env.GOOGLE_APPLICATION_CREDENTIALS?.trim(),
   );
 }
@@ -24,8 +24,7 @@ export function hasAdminCredentials(): boolean {
 export function getAdminApp(): admin.app.App {
   if (admin.apps.length > 0) return admin.app();
 
-  // App Hosting injects FIREBASE_CONFIG; Admin SDK can init without explicit creds.
-  if (process.env.FIREBASE_CONFIG?.trim() && !hasAdminCredentials()) {
+  if (process.env.FIREBASE_CONFIG?.trim()) {
     return admin.initializeApp({ storageBucket: DEFAULT_STORAGE_BUCKET });
   }
 
