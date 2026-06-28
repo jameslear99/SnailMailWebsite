@@ -11,6 +11,7 @@ export default function TermsPage() {
     <LegalPage
       title="Terms of Service"
       lastUpdated="Draft"
+      showDraftNotice
       intro="These Terms govern use of the Snail Mail Social advertiser portal and the creation of physical mail advertising campaigns."
       sections={[
         {

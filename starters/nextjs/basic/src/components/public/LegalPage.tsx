@@ -8,21 +8,26 @@ export function LegalPage({
   lastUpdated,
   intro,
   sections,
+  showDraftNotice = false,
 }: {
   title: string;
   lastUpdated: string;
   intro: string;
   sections: LegalSection[];
+  /** When true, shows a banner that the page is pending legal review. */
+  showDraftNotice?: boolean;
 }) {
   return (
     <Container className="max-w-3xl py-16 sm:py-20">
       <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
       <p className="mt-2 text-sm text-muted-2">Last updated: {lastUpdated}</p>
 
-      <Alert tone="warning" className="mt-6" title="Placeholder — pending legal review">
-        This document is a placeholder and does not constitute legal advice. It must be reviewed and
-        finalized by qualified legal counsel before launch.
-      </Alert>
+      {showDraftNotice ? (
+        <Alert tone="warning" className="mt-6" title="Placeholder — pending legal review">
+          This document is a placeholder and does not constitute legal advice. It must be reviewed and
+          finalized by qualified legal counsel before launch.
+        </Alert>
+      ) : null}
 
       <p className="mt-8 text-muted">{intro}</p>
 
