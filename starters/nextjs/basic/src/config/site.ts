@@ -28,6 +28,7 @@ export const PUBLIC_NAV = [
 export const FOOTER_NAV = {
   Product: [
     { label: "How it works", href: "/#how-it-works" },
+    { label: "SnailMail Pro", href: "/snailmail-pro" },
     { label: "For advertisers", href: "/advertisers" },
     { label: "Pricing", href: "/pricing" },
   ],
