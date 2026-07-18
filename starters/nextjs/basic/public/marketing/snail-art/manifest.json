@@ -1,0 +1,23 @@
+{
+  "2": {
+    "antenna": "/marketing/snail-art/set-2-antenna.png",
+    "body": "/marketing/snail-art/set-2-body.png",
+    "shell": "/marketing/snail-art/set-2-shell.png",
+    "face": "/marketing/snail-art/set-2-face.png",
+    "accessory": "/marketing/snail-art/set-2-accessory.png"
+  },
+  "5": {
+    "antenna": "/marketing/snail-art/set-5-antenna.png",
+    "body": "/marketing/snail-art/set-5-body.png",
+    "shell": "/marketing/snail-art/set-5-shell.png",
+    "face": "/marketing/snail-art/set-5-face.png",
+    "accessory": "/marketing/snail-art/set-5-accessory.png"
+  },
+  "8": {
+    "antenna": "/marketing/snail-art/set-8-antenna.png",
+    "body": "/marketing/snail-art/set-8-body.png",
+    "shell": "/marketing/snail-art/set-8-shell.png",
+    "face": "/marketing/snail-art/set-8-face.png",
+    "accessory": "/marketing/snail-art/set-8-accessory.png"
+  }
+}

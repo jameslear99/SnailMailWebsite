@@ -12,8 +12,8 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      lastUpdated="June 28, 2026"
-      intro={`This Privacy Policy describes how ${SITE.company} ("Snail Mail Social," "we," "us," or "our") collects, uses, stores, shares, and protects information when you use the Snail Mail Social mobile app, this website (${SITE.name}), and the advertiser portal. It includes specific disclosures about data we receive from Google when you choose to sign in with Google.`}
+      lastUpdated="July 17, 2026"
+      intro={`This Privacy Policy describes how ${SITE.company} ("Snail Mail Social," "we," "us," or "our") collects, uses, stores, shares, and protects information when you use the Snail Mail Social mobile app, SnailMail Pro, this website (${SITE.name}), and (when available) the advertiser portal. It includes specific disclosures about data we receive from Google when you choose to sign in with Google.`}
       sections={[
         {
           heading: "Who we are",
@@ -28,7 +28,9 @@ export default function PrivacyPage() {
             "Depending on how you use Snail Mail Social, we may collect:",
             "Account and profile information you provide (such as name, username, email address, date of birth, profile photo, bio, and mailing address).",
             "Content you create in the app (posts, messages, photos, and preferences).",
+            "Snail pal and in-app progress data (such as snail customization, XP, and unlocks).",
             "Device and usage information needed to operate, secure, and improve the service (such as device type, app version, and general usage events).",
+            "Subscription and purchase status for SnailMail Pro (via Apple App Store, Google Play, and RevenueCat). We do not receive your full payment card number from app stores.",
             "Advertiser business details, campaign data, and billing identifiers when you use the advertiser portal.",
           ],
         },
@@ -65,8 +67,24 @@ export default function PrivacyPage() {
             "Google Firebase (authentication, database, storage, and hosting infrastructure) to authenticate users and store account data securely.",
             "Print and mail fulfillment partners, only to the extent necessary to print and deliver physical mail you request. We do not share your Google sign-in credentials with fulfillment partners.",
             "Payment processors such as Stripe for advertiser billing. Stripe receives billing and business information for advertiser accounts, not Google OAuth tokens or Google profile data used for consumer sign-in.",
+            "Apple, Google, and RevenueCat to validate SnailMail Pro subscription status. These providers receive purchase identifiers needed to confirm entitlements, not Google OAuth tokens.",
             "Law enforcement or other parties when required by law, to protect rights and safety, or to respond to valid legal process.",
             "We do not transfer or disclose Google user data to third parties for their independent advertising, marketing, or data-broker purposes.",
+          ],
+        },
+        {
+          heading: "Mailing address and physical delivery",
+          body: [
+            "If you subscribe to SnailMail Pro or send physical mail, we collect and store the mailing address you provide.",
+            "Your mailing address is shared only with our print and mail fulfillment partners to produce and deliver mail. Other Snail Mail Social users, including friends, cannot see your mailing address in the app.",
+            "You can update your mailing address in app settings. Keeping your address accurate helps ensure successful delivery.",
+          ],
+        },
+        {
+          heading: "SnailMail Pro subscriptions",
+          body: [
+            "SnailMail Pro purchases are processed by Apple or Google through in-app purchase. RevenueCat helps us link subscription status to your Snail Mail Social account.",
+            "We receive subscription status, product identifiers, and transaction metadata needed to grant physical-mail entitlements. Payment credentials are handled by the app store, not by us.",
           ],
         },
         {
@@ -108,9 +126,10 @@ export default function PrivacyPage() {
           ],
         },
         {
-          heading: "Payment processing through Stripe",
+          heading: "Payment processing",
           body: [
             "Advertiser payments are processed by Stripe. We do not store full card numbers; payment credentials are handled by Stripe in accordance with their terms and security standards.",
+            "SnailMail Pro subscriptions are processed by Apple or Google. Refund and billing inquiries for subscriptions should be directed to the app store where you purchased.",
           ],
         },
         {

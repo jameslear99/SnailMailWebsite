@@ -3,166 +3,119 @@ import { Button } from "@/components/ui/Button";
 import {
   Section,
   SectionHeading,
-  AssetPlaceholder,
-  FeatureCard,
+  Eyebrow,
 } from "@/components/public/marketing";
+import {
+  LandingHero,
+  PhysicalMailFlow,
+  SnailArtComposite,
+} from "@/components/public/marketing-visuals";
+import { SnailScrollWall } from "@/components/public/snail-scroll-wall";
+import { HOME_SNAIL_PLACEMENTS, formatSnailCombinationCount } from "@/config/marketing-assets";
 import { SITE } from "@/config/site";
 
 export default function HomePage() {
+  const combinationLabel = formatSnailCombinationCount();
+
   return (
     <>
-      {/* Hero */}
-      <section className="bg-hero-glow relative overflow-hidden border-b border-border">
-        <Container className="grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-2">
-          <div>
-            <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+      <LandingHero
+        headline={
+          <>
+            <Eyebrow className="mb-5">Physical social media</Eyebrow>
+            <h1 className="max-w-xl text-[2.5rem] font-semibold leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[3.25rem]">
               Social posts you can hold in your hands.
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-muted">
-              {SITE.name} turns digital posts into beautiful printed mail bundles that friends
-              actually open — and gives advertisers a smarter, more trackable way to reach real
-              audiences through physical mail.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href={SITE.appStoreUrl} size="lg">
-                Download the app
-              </Button>
-              <Button href="/advertisers" variant="outline" size="lg">
-                Advertise with us
-              </Button>
-            </div>
-            <p className="mt-4 text-sm text-muted-2">
-              No spam. No junk. Mail people are excited to receive.
-            </p>
-          </div>
-          <div className="relative">
-            <AssetPlaceholder label="App preview / mail bundle mockup" ratio="aspect-[4/5]" />
-            <div className="absolute -bottom-5 -left-5 hidden w-40 sm:block">
-              <AssetPlaceholder label="Snail art" ratio="aspect-square" className="bg-surface" />
-            </div>
-          </div>
-        </Container>
-      </section>
+          </>
+        }
+        subhead={
+          <p className="max-w-md text-lg leading-relaxed text-muted">
+            {SITE.name} turns digital posts into beautiful printed mail bundles that friends
+            actually open — slow, tangible, and worth keeping.
+          </p>
+        }
+        tagline="No spam. No junk. Mail people are excited to receive."
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button href={SITE.appStoreUrl} size="lg">
+            Download the app
+          </Button>
+          <Button href="/snailmail-pro" variant="outline" size="lg">
+            What is SnailMail Pro?
+          </Button>
+        </div>
+      </LandingHero>
 
-      {/* What it is */}
-      <Section id="how-it-works">
+      <Section className="overflow-hidden border-b border-border bg-surface !py-12 sm:!py-16">
+        <SectionHeading
+          eyebrow="Snail pals"
+          title="Every snail is unique to you!"
+          description={`Mix shells, faces, accessories, and colors into a pal that's yours alone. With ${combinationLabel} possible combinations, you're unlikely to meet your snail twin.`}
+        />
+        <div className="mt-10 sm:mt-12">
+          <SnailScrollWall />
+        </div>
+      </Section>
+
+      <Section id="how-it-works" className="bg-background">
         <SectionHeading
           eyebrow="How it works"
           title="A social network that ends in the mailbox"
-          description="Create posts in the app like any social feed. We bundle them, print them, and physically mail them to the people you choose."
+          description="Create square posts in the app like any social feed. We bundle them, print them, and physically mail them to the people you choose."
         />
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14">
+          <PhysicalMailFlow />
+        </div>
+        <div className="mt-16 grid gap-6 md:grid-cols-3">
           {[
             {
               n: "01",
               title: "Post in the app",
-              body: "Share photos, notes, and updates with friends and family inside Snail Mail Social — just like a normal feed.",
+              body: "Share square photos, notes, and updates with friends and family — just like a normal feed.",
             },
             {
               n: "02",
               title: "We bundle & print",
-              body: "Your posts are collected into a printed bundle on a regular cadence, designed to feel personal and premium.",
+              body: "Posts become a printed bundle on a regular cadence — personal, premium, and physical.",
             },
             {
               n: "03",
               title: "It arrives by mail",
-              body: "The bundle is physically mailed. Recipients can scan a QR code to earn in-app XP for their snail.",
+              body: "The bundle lands in a real mailbox. Scan the QR to earn XP for your snail.",
             },
           ].map((s) => (
-            <div key={s.n} className="rounded-[var(--radius-lg)] border border-border bg-surface p-6">
+            <div
+              key={s.n}
+              className="rounded-[var(--radius-xl)] border border-border bg-surface p-6 transition-shadow hover:shadow-md"
+            >
               <span className="font-mono text-sm font-semibold text-brand-600">{s.n}</span>
               <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>
-              <p className="mt-2 text-sm text-muted">{s.body}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* Why physical */}
-      <Section className="border-y border-border bg-surface">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <AssetPlaceholder label="Bundle / envelope photography" ratio="aspect-[4/3]" />
-          <div>
-            <SectionHeading
-              align="left"
-              eyebrow="Why physical social media?"
-              title="Attention is rare. The mailbox still gets opened."
-            />
-            <ul className="mt-6 space-y-4">
-              {[
-                "Physical mail commands focused, distraction-free attention that feeds can't match.",
-                "A bundle of posts from people you care about is something to look forward to — not scroll past.",
-                "It's tangible and keepable, so it lingers far longer than a digital impression.",
-              ].map((t) => (
-                <li key={t} className="flex gap-3 text-muted">
-                  <span className="mt-1.5 size-2 shrink-0 rounded-full bg-brand-600" />
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* For advertisers */}
-      <Section id="advertisers">
-        <SectionHeading
-          eyebrow="For advertisers"
-          title="A smarter form of printed advertising"
-          description="Reach real, targeted audiences inside mail people actually want — and only pay for ads that are physically printed and sent."
-        />
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <FeatureCard
-            title="Targeted by real audiences"
-            description="Target by location, age, gender, and interests from real user profiles — never individual user data."
-          />
-          <FeatureCard
-            title="High-attention placement"
-            description="Your ad rides inside a mail bundle recipients are genuinely excited to open."
-          />
-          <FeatureCard
-            title="Pay per printed ad"
-            description="Billing is based on the actual number of ads printed and sent. No minimum spend, no minimum quantity."
-          />
-          <FeatureCard
-            title="Trackable performance"
-            description="See printed and mailed counts, estimated opens, and spend — all in one dashboard."
-          />
-          <FeatureCard
-            title="Estimated open tracking"
-            description="Recipients scan a QR code for in-app XP, giving you an estimated open signal for each bundle."
-          />
-          <FeatureCard
-            title="Your own QR codes"
-            description="Include your own QR codes or tracking URLs in your artwork to measure response directly."
-          />
-        </div>
-        <div className="mt-12 flex justify-center">
-          <Button href="/advertisers" size="lg">
-            Explore the advertiser platform
-          </Button>
-        </div>
-      </Section>
-
-      {/* CTA band */}
       <section className="bg-surface-inverse">
-        <Container className="grid items-center gap-8 py-16 sm:py-20 lg:grid-cols-2">
+        <Container className="grid items-center gap-10 py-20 lg:grid-cols-[1fr_auto] lg:gap-16">
           <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-on-inverse sm:text-4xl">
-              Ready to reach people where they actually look?
+            <h2 className="text-3xl font-semibold tracking-tight text-on-inverse sm:text-4xl lg:max-w-lg">
+              Get the app. Get the good mail.
             </h2>
-            <p className="mt-4 max-w-lg text-lg text-on-inverse/70">
-              Create a free advertiser account and build your first physical mail campaign in
-              minutes. You&apos;re only charged after ads are printed and sent.
+            <p className="mt-4 max-w-md text-lg text-on-inverse/70">
+              Download Snail Mail Social and start sending posts that become real mail.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3 lg:justify-end">
-            <Button href="/signup" size="lg">
-              Create advertiser account
-            </Button>
-            <Button href="/pricing" variant="secondary" size="lg">
-              View pricing
-            </Button>
+          <div className="flex flex-col items-center gap-8 sm:flex-row lg:flex-col xl:flex-row xl:items-end">
+            <SnailArtComposite setId={HOME_SNAIL_PLACEMENTS.cta} size={160} />
+            <div className="flex flex-wrap gap-3">
+              <Button href={SITE.appStoreUrl} size="lg">
+                Download the app
+              </Button>
+              <Button href="/snailmail-pro" variant="secondary" size="lg">
+                SnailMail Pro
+              </Button>
+            </div>
           </div>
         </Container>
       </section>

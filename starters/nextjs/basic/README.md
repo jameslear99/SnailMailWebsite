@@ -29,9 +29,9 @@ See `.env.example`. Summary:
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_FIREBASE_*` | Browser Firebase config (Auth/Firestore/Storage). On **Firebase App Hosting**, these are auto-injected via `FIREBASE_WEBAPP_CONFIG` when the backend is linked to a web app — no Secret Manager entries needed. |
-| `GOOGLE_APPLICATION_CREDENTIALS` **or** `FIREBASE_SERVICE_ACCOUNT_JSON` | Server Admin SDK creds for API routes (contact form, billing, token verification). On App Hosting, `FIREBASE_CONFIG` is injected automatically. |
-| `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET` | Stripe. Leave blank to run the portal in "billing not configured" mode. Set via App Hosting environment variables or secrets when ready. |
+| `NEXT_PUBLIC_FIREBASE_*` | Browser Firebase config (Auth/Firestore/Storage). |
+| `GOOGLE_APPLICATION_CREDENTIALS` **or** `FIREBASE_SERVICE_ACCOUNT_JSON` | Server Admin SDK creds for API routes (contact form, billing, token verification). |
+| `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET` | Stripe. Leave blank to run the portal in "billing not configured" mode. |
 
 The app degrades gracefully: without Admin creds the contact form returns a clear 503
 (it never fakes success); without Stripe keys the billing page shows a "not connected" state.

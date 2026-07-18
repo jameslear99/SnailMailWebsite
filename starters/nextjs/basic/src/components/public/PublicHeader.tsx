@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { PUBLIC_NAV } from "@/config/site";
+import { PUBLIC_NAV, SITE } from "@/config/site";
 import { useAuth } from "@/lib/auth-context";
 import { cn } from "@/lib/cn";
 
@@ -31,11 +31,11 @@ export function PublicHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          {ready && user ? (
+          {ready && user && SITE.advertiserPortalEnabled ? (
             <Button href="/dashboard" size="sm">
               Go to dashboard
             </Button>
-          ) : (
+          ) : ready && user ? null : SITE.advertiserPortalEnabled ? (
             <>
               <Button href="/login" variant="ghost" size="sm">
                 Log in
@@ -44,7 +44,7 @@ export function PublicHeader() {
                 Create advertiser account
               </Button>
             </>
-          )}
+          ) : null}
         </div>
 
         <button
@@ -81,11 +81,11 @@ export function PublicHeader() {
             </Link>
           ))}
           <div className="mt-2 flex flex-col gap-2">
-            {ready && user ? (
+            {ready && user && SITE.advertiserPortalEnabled ? (
               <Button href="/dashboard" className="w-full">
                 Go to dashboard
               </Button>
-            ) : (
+            ) : ready && user ? null : SITE.advertiserPortalEnabled ? (
               <>
                 <Button href="/login" variant="outline" className="w-full">
                   Log in
@@ -94,7 +94,7 @@ export function PublicHeader() {
                   Create advertiser account
                 </Button>
               </>
-            )}
+            ) : null}
           </div>
         </Container>
       </div>

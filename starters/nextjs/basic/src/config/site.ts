@@ -16,10 +16,12 @@ export const SITE = {
   appStoreUrl: "#",
   playStoreUrl: "#",
   company: "Snail Mail Social, Inc.",
+  /** When false, advertiser login/signup is hidden; /advertisers shows a coming-soon info page. */
+  advertiserPortalEnabled: false,
 } as const;
 
 export const PUBLIC_NAV = [
-  { label: "For Advertisers", href: "/advertisers" },
+  { label: "Physical advertising", href: "/advertisers" },
   { label: "Pricing", href: "/pricing" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
@@ -41,8 +43,8 @@ export const FOOTER_NAV = {
     { label: "Terms", href: "/terms" },
   ],
   Advertisers: [
-    { label: "Log in", href: "/login" },
-    { label: "Create account", href: "/signup" },
+    { label: "Physical advertising", href: "/advertisers" },
+    { label: "Pricing preview", href: "/pricing" },
   ],
 } as const;
 

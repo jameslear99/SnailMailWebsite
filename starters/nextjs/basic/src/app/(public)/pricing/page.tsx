@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Button } from "@/components/ui/Button";
 import { Section, SectionHeading } from "@/components/public/marketing";
+import { AdvertiserWaitlistButton } from "@/components/public/advertiser-waitlist-modal";
 import { Container } from "@/components/ui/Container";
 import { DEFAULT_AD_TIERS, formatPrice, MAX_AD_PAGES_PER_BUNDLE } from "@/config/ad-tiers";
 
@@ -61,9 +61,14 @@ export default function PricingPage() {
                   </dd>
                 </div>
               </dl>
-              <Button href="/signup" className="mt-6 w-full" variant={i === 2 ? "primary" : "outline"}>
-                Get started
-              </Button>
+              <AdvertiserWaitlistButton
+                source="pricing"
+                className="mt-6 w-full"
+                variant={i === 2 ? "primary" : "outline"}
+                size="md"
+              >
+                Notify me at launch
+              </AdvertiserWaitlistButton>
             </div>
           ))}
         </div>
@@ -81,13 +86,18 @@ export default function PricingPage() {
 
       <section className="bg-surface-inverse">
         <Container className="py-16 text-center">
-          <h2 className="text-2xl font-semibold text-on-inverse sm:text-3xl">
-            Build a campaign and see your estimate
+          <span className="inline-flex items-center rounded-full border border-on-inverse/20 bg-on-inverse/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-on-inverse/80">
+            Coming soon
+          </span>
+          <h2 className="mt-4 text-2xl font-semibold text-on-inverse sm:text-3xl">
+            Advertiser accounts opening soon
           </h2>
+          <p className="mx-auto mt-3 max-w-lg text-on-inverse/70">
+            Preview pricing above. Join the waitlist for early access when self-serve campaigns
+            launch.
+          </p>
           <div className="mt-6 flex justify-center">
-            <Button href="/signup" size="lg">
-              Create advertiser account
-            </Button>
+            <AdvertiserWaitlistButton source="pricing" size="lg" variant="secondary" />
           </div>
         </Container>
       </section>
