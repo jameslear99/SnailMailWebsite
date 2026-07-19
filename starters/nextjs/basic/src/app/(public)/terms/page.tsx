@@ -68,7 +68,7 @@ export default function TermsPage() {
           body: [
             "Consumer subscriptions are handled by Apple or Google through in-app purchase. Advertiser payments, when available, are processed by Stripe. We do not store full payment card numbers.",
             "Refunds for app subscriptions follow the policies of the app store through which you purchased. Advertiser billing disputes should be sent to " +
-              SITE.advertiserEmail +
+              SITE.email +
               ".",
           ],
         },
@@ -96,9 +96,7 @@ export default function TermsPage() {
         {
           heading: "Contact",
           body: [
-            `General: ${SITE.contactEmail}`,
-            `Support: ${SITE.supportEmail}`,
-            `Advertisers: ${SITE.advertiserEmail}`,
+            `For general questions, support, or advertiser inquiries, contact us at ${SITE.email}.`,
           ],
         },
       ]}

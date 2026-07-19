@@ -19,7 +19,7 @@ export default function PrivacyPage() {
           heading: "Who we are",
           body: [
             `${SITE.company} operates Snail Mail Social, a service that turns digital posts into physical mail bundles and offers family-friendly printed advertising to advertisers.`,
-            `This policy applies to all Snail Mail Social products. Questions about privacy can be sent to ${SITE.contactEmail}.`,
+            `This policy applies to all Snail Mail Social products. Questions about privacy can be sent to ${SITE.email}.`,
           ],
         },
         {
@@ -94,7 +94,7 @@ export default function PrivacyPage() {
             "Data is transmitted over encrypted connections (HTTPS/TLS). Account data is stored using Firebase and Google Cloud infrastructure with access controls limited to authorized personnel and systems.",
             "OAuth tokens and authentication credentials are handled through Firebase Authentication; we do not store your Google password.",
             "No method of transmission or storage is completely secure. If you believe your account has been compromised, contact us at " +
-              SITE.supportEmail +
+              SITE.email +
               ".",
           ],
         },
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
             "We retain personal information, including Google user data, for as long as your account is active and as needed to provide Snail Mail Social, comply with legal obligations, resolve disputes, and enforce our agreements.",
             "When you delete your Snail Mail Social account, we delete or anonymize your personal information within a reasonable period, except where retention is required by law or needed for legitimate business purposes such as fraud prevention, billing records, or security logs.",
             "You may request access to, correction of, or deletion of your personal information by contacting " +
-              SITE.contactEmail +
+              SITE.email +
               ". We may need to verify your identity before fulfilling a request.",
             "If you signed in with Google, you can also revoke Snail Mail Social's access to your Google account at any time through your Google Account permissions settings at https://myaccount.google.com/permissions.",
           ],
@@ -136,7 +136,7 @@ export default function PrivacyPage() {
           heading: "Children",
           body: [
             "Snail Mail Social requires users to be at least 13 years old to create an account. We do not knowingly collect personal information from children under 13. If you believe a child under 13 has provided us information, contact us at " +
-              SITE.contactEmail +
+              SITE.email +
               ".",
           ],
         },
@@ -150,9 +150,7 @@ export default function PrivacyPage() {
         {
           heading: "Contact us",
           body: [
-            `Privacy questions or requests: ${SITE.contactEmail}`,
-            `Support: ${SITE.supportEmail}`,
-            `Advertiser inquiries: ${SITE.advertiserEmail}`,
+            `For privacy questions, support, advertiser inquiries, or account requests, contact us at ${SITE.email}.`,
           ],
         },
       ]}
