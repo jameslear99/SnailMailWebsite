@@ -8,10 +8,8 @@ export const SITE = {
   tagline: "Physical social media that people actually open.",
   description:
     "Snail Mail Social turns digital posts into physical mail bundles people love to receive — and gives advertisers a smarter, trackable way to reach real audiences through print.",
-  // Public contact + legal placeholders. Replace before launch.
-  contactEmail: "hello@snailmail.social",
-  advertiserEmail: "advertisers@snailmail.social",
-  supportEmail: "support@snailmail.social",
+  /** Primary contact email for support, general inquiries, privacy requests, and advertisers. */
+  email: "admin@vellastories.app",
   // App store placeholders (assets/links to be added later).
   appStoreUrl: "#",
   playStoreUrl: "#",
@@ -35,6 +33,7 @@ export const FOOTER_NAV = {
     { label: "Pricing", href: "/pricing" },
   ],
   Company: [
+    { label: "Support", href: "/support" },
     { label: "Contact", href: "/contact" },
     { label: "FAQ", href: "/faq" },
   ],

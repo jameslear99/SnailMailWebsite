@@ -200,10 +200,10 @@ export default function AdvertisersPage() {
             We&apos;re finishing the self-serve campaign builder and review workflow. Join the
             waitlist for early access or ask about pilot campaigns at{" "}
             <a
-              href={`mailto:${SITE.advertiserEmail}`}
+              href={`mailto:${SITE.email}`}
               className="text-on-inverse underline underline-offset-2"
             >
-              {SITE.advertiserEmail}
+              {SITE.email}
             </a>
             .
           </p>
