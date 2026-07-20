@@ -29,7 +29,7 @@ export const HERO_SNAIL_SLIDE_END = 21;
 export const HERO_SNAIL_INITIAL_SET = 18 as SnailArtSetId;
 
 /** Excluded from the hero slideshow (broken layers or art we don't want featured). */
-export const HERO_SNAIL_EXCLUDED_SETS: SnailArtSetId[] = [5];
+export const HERO_SNAIL_EXCLUDED_SETS: SnailArtSetId[] = [5, 6];
 
 /** Sets used for marketing random generation and hero slideshow. */
 export const MARKETING_SNAIL_POOL = Array.from(
